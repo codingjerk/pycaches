@@ -2,6 +2,17 @@ import pytest
 import pycache
 
 
+def test_map_constructors() -> None:
+    pycache_map = pycache.Map()
+    assert len(pycache_map) == 0
+
+    pycache_map = pycache.Map({"1": 1})
+    assert pycache_map["1"] == 1
+
+    pycache_map = pycache.Map([("2", 2)])
+    assert pycache_map["2"] == 2
+
+
 def test_map_to_dictionary() -> None:
     python_dict = {"1": 1, "2": 2, "3": 3}
     pycache_map = pycache.Map(python_dict)

@@ -2,7 +2,7 @@
 A bunch of caches
 """
 
-from typing import Any, Iterator, Generic, Mapping, MutableMapping, TypeVar
+from typing import Any, Dict, Generic, Iterator, List, Mapping, MutableMapping, Tuple, TypeVar, Union
 
 
 Key = TypeVar("Key")
@@ -14,8 +14,17 @@ class Map(MutableMapping[Key, Value]):
     Dict-like collection with no `Hashable` restriction on elements
     """
 
-    def __init__(self, from_collection: MutableMapping[Key, Value]) -> None:
-        self.from_collection = from_collection
+    from_collection: Dict[Key, Value]
+
+    def __init__(
+        self,
+        from_collection: Union[
+            None,
+            Mapping[Key, Value],
+            List[Tuple[Key, Value]],
+        ] = None,
+    ) -> None:
+        self.from_collection = dict(from_collection or [])
 
     def __len__(self) -> int:
         return len(self.from_collection)
