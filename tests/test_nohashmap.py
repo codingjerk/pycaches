@@ -66,3 +66,22 @@ def test_map_delitem() -> None:
     del pycache_map["1"]
 
     assert "1" not in pycache_map
+
+
+def test_unhashable_items_in_maps() -> None:
+    pycache_map = pycache.Map()
+    examples = [
+        (["key"], "list value"),
+        ({"key": "key"}, "dict value"),
+        ({"key"}, "set value"),
+    ]
+
+    for key, value in examples:
+        pycache_map[key] = value
+        assert pycache_map[key] == value
+
+    assert len(pycache_map) == len(examples)
+
+    for key, _ in examples:
+        del pycache_map[key]
+        assert key not in pycache_map
