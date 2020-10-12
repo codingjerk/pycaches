@@ -18,7 +18,7 @@ lint:
 typecheck:
 	@echo [ === TYPECHECK === ]
 	@python3 -m mypy --strict --pretty --no-error-summary $(package)
-	@python3 -m mypy --strict --pretty --no-error-summary tests
+	@python3 -m mypy --strict --pretty --no-error-summary --allow-untyped-decorators tests
 
 coverage:
 	@echo [ === COVERAGE === ]

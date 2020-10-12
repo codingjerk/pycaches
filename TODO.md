@@ -4,7 +4,7 @@
 
 □ Write the docs
 
-□ `NohashMap` to store cache independent if items are `Hashable`
+□ `Map` to store cache independent if items are `Hashable`
 
 □ `CachePolicy` interface to allow to use different cache policies
 
@@ -15,3 +15,7 @@
 □ Cache decorator (with sane defaults)
 
 □ Do benchmarks
+
+## Small todos:
+
+□ Methods for Map: iter, next, missing, keys, values, items, get, clear, setdefault, pop, popitem, copy, update
