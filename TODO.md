@@ -14,7 +14,7 @@
 
 □ Cache decorator (with sane defaults)
 
-□ Do benchmarks
+□ Do benchmarks with pytest-benchmark
 
 ## Small todos:
 
