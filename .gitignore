@@ -10,6 +10,10 @@ __pycache__
 # Pyenv
 .python-version
 
+# pytest-benchmark
+.benchmarks
+.benchmarks/
+
 # C extensions
 *.so
 

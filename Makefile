@@ -1,12 +1,12 @@
-all: lint typecheck test coverage quality build
+all: lint typecheck test coverage quality benchmark build
 
-.PHONY: test lint typecheck coverage quality build deploy all
+.PHONY: test lint typecheck coverage quality benchmark build deploy all
 
 package = pycache
 
 test:
 	@echo [ === TEST === ]
-	@python3 -m pytest --quiet
+	@python3 -m pytest --quiet --benchmark-disable
 
 lint:
 	@echo [ === LINT === ]
@@ -28,6 +28,14 @@ quality:
 	@echo [ === QUALITY === ]
 	@! radon mi $(package)/**.py | grep -v " - A"
 	@! radon cc $(package)/**.py | grep -vP "\.py"$ | grep -v " - A"
+
+benchmark:
+	@echo [ === BENCHMARK === ]
+	@python3 -m pytest --quiet --benchmark-only --benchmark-save=benchmark
+
+benchmark_compare:
+	@echo [ === BENCHMARK === ]
+	@python3 -m pytest --quiet --benchmark-only --benchmark-compare
 
 build:
 	@echo [ === BUILD === ]
