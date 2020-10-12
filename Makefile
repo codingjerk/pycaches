@@ -11,7 +11,7 @@ test:
 lint:
 	@echo [ === LINT === ]
 	@python3 -m pycodestyle $(package)
-	@python3 -m pylint $(package)
+	@python3 -m pylint --disable=W1116 $(package)
 	@python3 -m pycodestyle tests
 	@python3 -m pylint --disable=C0114,C0116,E0401,W0611 tests
 
