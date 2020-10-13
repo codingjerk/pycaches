@@ -18,6 +18,4 @@
 
 ## Small todos:
 
-□ Methods for Map: iter, next, missing, keys, values, items, get, clear, setdefault, pop, popitem, copy, update
-
-□ Use deep copy for keys
+□ Use optional deep copy for keys

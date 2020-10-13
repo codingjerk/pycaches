@@ -40,10 +40,27 @@ class Map(MutableMapping[Key, Value]):
     ) -> None:
         self.from_collection = dict(from_collection or [])
 
-        self.__unhashable_items: List[KeyValue[Key, Value]] = list()
+        self._unhashable_items: List[KeyValue[Key, Value]] = list()
+
+    def copy(self) -> "Map[Key, Value]":
+        """
+        Returns shallow copy of Map
+        """
+
+        clone = Map(self.from_collection)
+
+        for item in self._unhashable_items:
+            clone[item.key] = item.value
+
+        return clone
+
+    def __eq__(self, other: Any) -> bool:
+        return isinstance(other, Map) \
+            and self.from_collection == other.from_collection \
+            and self._unhashable_items == other._unhashable_items
 
     def __len__(self) -> int:
-        return len(self.from_collection) + len(self.__unhashable_items)
+        return len(self.from_collection) + len(self._unhashable_items)
 
     def __getitem__(self, key: Key) -> Value:
         if not isinstance(key, Hashable):
@@ -61,7 +78,7 @@ class Map(MutableMapping[Key, Value]):
         for key in self.from_collection:
             yield key
 
-        for item in self.__unhashable_items:
+        for item in self._unhashable_items:
             yield item.key
 
     def __setitem__(self, key: Key, value: Value) -> None:
@@ -79,30 +96,30 @@ class Map(MutableMapping[Key, Value]):
         del self.from_collection[key]
 
     def __getitem_unhashable(self, key: Key) -> Value:
-        for item in self.__unhashable_items:
+        for item in self._unhashable_items:
             if item.key == key:
                 return item.value
 
         raise KeyError(key)
 
     def __contains_unhashable(self, key: Key) -> bool:
-        for item in self.__unhashable_items:
+        for item in self._unhashable_items:
             if item.key == key:
                 return True
 
         return False
 
     def __setitem_unhashable(self, key: Key, value: Value) -> None:
-        for item in self.__unhashable_items:
+        for item in self._unhashable_items:
             if item.key == key:
                 item.value = value
                 return
 
-        self.__unhashable_items.append(KeyValue(key, value))
+        self._unhashable_items.append(KeyValue(key, value))
 
     def __delitem_unhashable(self, key: Key) -> None:
-        for item in self.__unhashable_items:
+        for item in self._unhashable_items:
             if item.key == key:
-                return self.__unhashable_items.remove(item)
+                return self._unhashable_items.remove(item)
 
         raise KeyError(key)
