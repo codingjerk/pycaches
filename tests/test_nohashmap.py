@@ -1,29 +1,29 @@
 from typing import Any
 import pytest
 
-import pycache
+from pycache import Map
 
 
 def test_map_constructors() -> None:
-    pycache_map: pycache.Map[str, int] = pycache.Map()
+    pycache_map: Map[str, int] = Map()
     assert len(pycache_map) == 0
 
-    pycache_map = pycache.Map({"1": 1})
+    pycache_map = Map({"1": 1})
     assert pycache_map["1"] == 1
 
-    pycache_map = pycache.Map([("2", 2)])
+    pycache_map = Map([("2", 2)])
     assert pycache_map["2"] == 2
 
 
 def test_map_to_dictionary() -> None:
     python_dict = {"1": 1, "2": 2, "3": 3}
-    pycache_map = pycache.Map(python_dict)
+    pycache_map = Map(python_dict)
 
     assert dict(pycache_map) == python_dict
 
 
 def test_map_in_operator() -> None:
-    pycache_map = pycache.Map({"1": 1, "2": 2, "3": 3})
+    pycache_map = Map({"1": 1, "2": 2, "3": 3})
 
     assert "1" in pycache_map
     assert "2" in pycache_map
@@ -33,7 +33,7 @@ def test_map_in_operator() -> None:
 
 
 def test_map_getitem() -> None:
-    pycache_map = pycache.Map({"1": 1, "2": 2, "3": 3})
+    pycache_map = Map({"1": 1, "2": 2, "3": 3})
 
     assert pycache_map["1"] == 1
     assert pycache_map["2"] == 2
@@ -44,7 +44,7 @@ def test_map_getitem() -> None:
 
 
 def test_map_len() -> None:
-    pycache_map = pycache.Map({"1": 1, "2": 2, "3": 3})
+    pycache_map = Map({"1": 1, "2": 2, "3": 3})
     assert len(pycache_map) == 3
 
     pycache_map["4"] = 4
@@ -55,7 +55,7 @@ def test_map_len() -> None:
 
 
 def test_map_setitem() -> None:
-    pycache_map = pycache.Map({"1": 1, "2": 2, "3": 3})
+    pycache_map = Map({"1": 1, "2": 2, "3": 3})
     pycache_map["1"] = 11
     pycache_map["4"] = 4
 
@@ -64,14 +64,14 @@ def test_map_setitem() -> None:
 
 
 def test_map_delitem() -> None:
-    pycache_map = pycache.Map({"1": 1, "2": 2, "3": 3})
+    pycache_map = Map({"1": 1, "2": 2, "3": 3})
     del pycache_map["1"]
 
     assert "1" not in pycache_map
 
 
 def test_unhashable_items_in_maps() -> None:
-    pycache_map: pycache.Map[Any, str] = pycache.Map()
+    pycache_map: Map[Any, str] = Map()
     examples = [
         (["key"], "list value"),
         ({"key": "key"}, "dict value"),
@@ -90,7 +90,7 @@ def test_unhashable_items_in_maps() -> None:
 
 
 def test_unhashable_items_deletion() -> None:
-    pycache_map: pycache.Map[Any, str] = pycache.Map()
+    pycache_map: Map[Any, str] = Map()
     examples = [
         (["key"], "list value"),
         ({"key": "key"}, "dict value"),
@@ -105,10 +105,18 @@ def test_unhashable_items_deletion() -> None:
 
 
 def test_unhashable_items_raises_errors() -> None:
-    pycache_map: pycache.Map[Any, str] = pycache.Map()
+    pycache_map: Map[Any, str] = Map()
 
     with pytest.raises(KeyError):
         _ = pycache_map[["not existed value"]]
 
     with pytest.raises(KeyError):
         del pycache_map[["not existed value"]]
+
+
+def test_map_iterable() -> None:
+    pycache_map: Map[Any, int] = Map({"1": 1, "2": 2, "3": 3})
+    pycache_map[{4: 4}] = 4
+
+    keys = [key for key in pycache_map]  # pylint: disable=R1721
+    assert keys == ["1", "2", "3", {4: 4}]

@@ -58,7 +58,11 @@ class Map(MutableMapping[Key, Value]):
         return key in self.from_collection
 
     def __iter__(self) -> Iterator[Key]:
-        return iter(self.from_collection)
+        for key in self.from_collection:
+            yield key
+
+        for item in self.__unhashable_items:
+            yield item.key
 
     def __setitem__(self, key: Key, value: Value) -> None:
         if not isinstance(key, Hashable):

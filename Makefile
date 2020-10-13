@@ -22,7 +22,7 @@ typecheck:
 
 coverage:
 	@echo [ === COVERAGE === ]
-	@PYTHONPATH=. python3 -m pytest --cov=$(package) --cov-fail-under=100 --cov-report=term-missing:skip-covered --quiet
+	@PYTHONPATH=. python3 -m pytest --cov=$(package) --cov-fail-under=100 --cov-report=term-missing:skip-covered --benchmark-disable --quiet
 
 quality:
 	@echo [ === QUALITY === ]
