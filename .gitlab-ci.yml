@@ -29,6 +29,10 @@ quality:
   stage: test
   script: make quality
 
+benchmark:
+  stage: test
+  script: make benchmark
+
 build:
   stage: build
   script: make build
