@@ -1,6 +1,6 @@
-all: lint typecheck test coverage quality benchmark build
+all: lint typecheck test coverage quality build
 
-.PHONY: test lint typecheck coverage quality benchmark build deploy all
+.PHONY: test lint typecheck coverage quality benchmark build deploy watch all
 
 package = pycache
 
@@ -45,3 +45,10 @@ deploy:
 	@echo [ === DEPLOY === ]
 	@rm -rf dist/$(package)-*.linux-x86_64.tar.gz
 	@python3 -m twine upload dist/$(package)-*.tar.gz
+
+watch:
+	@echo [ === WATCH === ]
+	@while true; do \
+		make --silent; \
+		inotifywait -qre close_write .; \
+	done
