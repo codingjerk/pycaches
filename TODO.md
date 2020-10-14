@@ -18,7 +18,9 @@
 
 □ Cache hit/miss/size statistics
 
-□ `cache` decorator (with sane defaults)
+□ `cache` decorator options (expiration_timedelta, policy, copy_keys)
+
+□ Allow cache to be persistent (use SQLite3 or whatever)
 
 ## Etc
 
