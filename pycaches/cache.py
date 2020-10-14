@@ -6,7 +6,8 @@ and replacement of elements
 
 
 from dataclasses import dataclass
-from typing import Generic, TypeVar
+from datetime import datetime, timedelta
+from typing import Generic, Optional, TypeVar
 
 from pycaches.nohashmap import Map
 
@@ -23,6 +24,17 @@ class CacheItem(Generic[Value]):
     """
 
     value: Value
+    expire_at: Optional[datetime]
+
+    def expired(self) -> bool:
+        """
+        Checks if item is expired
+        """
+
+        if self.expire_at is None:
+            return False
+
+        return datetime.now() >= self.expire_at
 
 
 class Cache(Generic[Key, Value]):
@@ -35,19 +47,28 @@ class Cache(Generic[Key, Value]):
     def __init__(self) -> None:
         self._map: Map[Key, CacheItem[Value]] = Map()
 
-    def save(self, key: Key, value: Value) -> None:
+    def save(
+        self,
+        key: Key,
+        value: Value,
+        expire_in: Optional[timedelta] = None,
+    ) -> None:
         """
         Adds item to cache
         """
 
-        self._map[key] = CacheItem(value)
+        expire_at: Optional[datetime] = None
+        if expire_in is not None:
+            expire_at = datetime.now() + expire_in
+
+        self._map[key] = CacheItem(value, expire_at)
 
     def has(self, key: Key) -> bool:
         """
         Checks if item with `key` is cached and not expired
         """
 
-        return key in self._map
+        return key in self._map and not self._map[key].expired()
 
     def get(self, key: Key) -> Value:
         """
@@ -56,4 +77,7 @@ class Cache(Generic[Key, Value]):
         """
 
         item = self._map[key]
+        if item.expired():
+            raise KeyError(key)
+
         return item.value

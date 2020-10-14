@@ -19,6 +19,7 @@ setup(
     setup_requires=[
     ],
     tests_require=[
+        "freezegun-1.0.0",
         "mypy==0.782",
         "pycodestyle==2.6.0",
         "pylint==2.6.0",
