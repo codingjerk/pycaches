@@ -15,7 +15,3 @@
 □ Cache decorator (with sane defaults)
 
 □ Do benchmarks with pytest-benchmark
-
-## Small todos:
-
-□ Use optional deep copy for keys

@@ -193,3 +193,26 @@ def test_map_iterable() -> None:
 
     keys = [key for key in pycache_map]  # pylint: disable=R1721
     assert keys == ["1", "2", "3", {4: 4}]
+
+
+def test_map_uses_deepcopy_by_default() -> None:
+    pycache_map: Map[Any, int] = Map()
+    key = {"some": "key"}
+
+    pycache_map[key] = 1
+    assert key in pycache_map
+
+    key["another"] = "value"
+    assert key not in pycache_map
+
+
+def test_map_allows_to_disable_deepcopy() -> None:
+    pycache_map: Map[Any, int] = Map(copy_keys=False)
+    key = {"some": "key"}
+
+    pycache_map[key] = 1
+    assert key in pycache_map
+
+    key["another"] = "value"
+    assert key in pycache_map
+    assert {"some": "key"} not in pycache_map

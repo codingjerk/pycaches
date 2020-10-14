@@ -2,11 +2,12 @@
 A bunch of caches
 """
 
+from copy import deepcopy
+from dataclasses import dataclass
 from typing import (
     Any, Dict, Generic, Hashable, Iterator, List,
     Mapping, MutableMapping, Tuple, TypeVar, Union
 )
-from dataclasses import dataclass
 
 
 Key = TypeVar("Key")
@@ -37,10 +38,11 @@ class Map(MutableMapping[Key, Value]):
             Mapping[Key, Value],
             List[Tuple[Key, Value]],
         ] = None,
+        copy_keys: bool = True,
     ) -> None:
         self.from_collection = dict(from_collection or [])
-
         self._unhashable_items: List[KeyValue[Key, Value]] = list()
+        self._copy_keys = copy_keys
 
     def copy(self) -> "Map[Key, Value]":
         """
@@ -115,7 +117,11 @@ class Map(MutableMapping[Key, Value]):
                 item.value = value
                 return
 
-        self._unhashable_items.append(KeyValue(key, value))
+        if self._copy_keys:
+            key = deepcopy(key)
+
+        item = KeyValue(key, value)
+        self._unhashable_items.append(item)
 
     def __delitem_unhashable(self, key: Key) -> None:
         for item in self._unhashable_items:
