@@ -2,7 +2,7 @@ all: lint typecheck test coverage quality build
 
 .PHONY: test lint typecheck coverage quality benchmark build deploy watch all
 
-package = pycache
+package = pycaches
 
 test:
 	@echo [ === TEST === ]

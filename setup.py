@@ -3,13 +3,13 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="pycache",
-    packages=find_packages(include="pycache"),
+    name="pycaches",
+    packages=find_packages(include="pycaches"),
     version="0.0.1",
     description="A bunch of caches",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/codingjerk/pycache",
+    url="https://github.com/codingjerk/pycaches",
     author="Denis Gruzdev",
     author_email="codingjerk@gmail.com",
     license="MIT",

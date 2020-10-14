@@ -1,7 +1,7 @@
-# pycache
+# pycaches
 
 A bunch of caches
 
 ## Installation
 
-`$ pip install pycache`
+`$ pip install pycaches`
