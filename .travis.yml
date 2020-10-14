@@ -19,6 +19,8 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 deploy:
+  python: "3.8"
+  skip_cleanup: true
   provider: script
   script: make deploy
   on:
