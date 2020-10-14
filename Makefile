@@ -50,5 +50,6 @@ watch:
 	@echo [ === WATCH === ]
 	@while true; do \
 		make --silent; \
-		inotifywait -qre close_write .; \
+		echo [ === WAITING FOR CHANGES === ]; \
+		inotifywait -qqre close_write .; \
 	done
