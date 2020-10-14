@@ -22,8 +22,6 @@
 
 □ Add badges to README
 
-□ Push to PyPi
-
 □ Add usage and contribution sections to README
 
 □ Write the docs

@@ -1,0 +1,30 @@
+language: python
+
+python:
+  - "3.7"
+  - "3.8"
+  - "3.9"
+
+branches:
+  only:
+  - master
+  - develop
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - make test lint typecheck coverage quality benchmark build
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+deploy:
+  provider: script
+  script: make deploy
+  on:
+    branch: master
+
+git:
+  quiet: true
+  submodules: false
