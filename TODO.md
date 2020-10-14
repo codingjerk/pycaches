@@ -8,22 +8,22 @@
 
 ## Cache
 
+□ `Cache` class to handle caches
+
 □ `CachePolicy` interface to allow to use different cache policies
 
 □ LRU/LFU/ARC cache policies
 
-□ Item expiration
+□ Cache item expiration
 
-□ Cache statistics
+□ Cache hit/miss/size statistics
 
 □ `cache` decorator (with sane defaults)
 
 ## Etc
 
-□ Add badges to README
-
-□ Add usage and contribution sections to README
-
-□ Write the docs
+□ Add usage to README
 
 □ Write more benchmarks for typical usage as a cache
+
+□ Add deploy tests (to make sure package is installable and importable)

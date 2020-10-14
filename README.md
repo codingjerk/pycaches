@@ -12,3 +12,18 @@ A bunch of caches
 ## Installation
 
 `$ pip install pycaches`
+
+## Contribution
+
+Just clone repository, make your changes and create a pull request.
+
+Do not forget to make sure code quality is high: run linters, typecheckers, check code coverage, etc. You can do it all with `make`:
+
+1. `make lint`: `pylint` and `pycodestyle`
+1. `make typecheck`: `mypy`
+1. `make test`: `pytest`
+1. `make coverage`: `pytest` with `pytest-cov`
+1. `make quality`: `radon`
+1. `make build`: `setup.py`
+
+And just `make` or `make all` to run all these targets
