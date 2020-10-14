@@ -13,6 +13,42 @@ A bunch of caches
 
 `$ pip install pycaches`
 
+## Usage
+
+### Decorator
+
+```
+from pycaches import cache
+
+
+@cache()
+def example():
+    print("Hi, I will be called once!")
+
+example()  # Prints "Hi, I will be called once!"
+example()  # Is not called
+```
+
+```
+import time
+
+from pycaches import cache
+
+
+@cache()
+def long_computation(x):
+    print("Performing long computation...")
+    time.sleep(1)
+    return x + 1
+
+long_computation(5)  # Sleeps for 1 second and returns 6
+long_computation(5)  # Immediately returns 6
+
+long_computation(6)  # Sleeps for 1 second and returns 7
+long_computation(6)  # Immediately returns 7
+long_computation(6)  # And again
+```
+
 ## Contribution
 
 Just clone repository, make your changes and create a pull request.

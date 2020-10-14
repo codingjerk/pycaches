@@ -24,8 +24,6 @@
 
 ## Etc
 
-□ Add usage to README
-
 □ Write more benchmarks for typical usage as a cache
 
 □ Add deploy tests (to make sure package is installable and importable)
