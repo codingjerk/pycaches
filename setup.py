@@ -28,6 +28,7 @@ setup(
         "pytest-runner==5.2",
         "pytest==6.0.1",
         "radon==4.3.2",
+        "twine==3.1.1",
     ],
     test_suite="tests",
 )
