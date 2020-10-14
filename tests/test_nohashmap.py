@@ -216,3 +216,12 @@ def test_map_allows_to_disable_deepcopy() -> None:
     key["another"] = "value"
     assert key in pycaches_map
     assert {"some": "key"} not in pycaches_map
+
+
+def test_map_saves_nested_unhashables() -> None:
+    pycaches_map: Map[Any, str] = Map()
+    key = ({1}, {2})
+    value = "whatever"
+
+    pycaches_map[key] = value
+    assert pycaches_map[key] == value

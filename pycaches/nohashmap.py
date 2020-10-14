@@ -66,13 +66,13 @@ class Map(MutableMapping[Key, Value]):
         return len(self.from_collection) + len(self._unhashable_items)
 
     def __getitem__(self, key: Key) -> Value:
-        if not isinstance(key, Hashable):
+        if self.__unhashable(key):
             return self.__getitem_unhashable(key)
 
         return self.from_collection[key]
 
     def __contains__(self, key: Any) -> bool:
-        if not isinstance(key, Hashable):
+        if self.__unhashable(key):
             return self.__contains_unhashable(key)
 
         return key in self.from_collection
@@ -85,14 +85,14 @@ class Map(MutableMapping[Key, Value]):
             yield item.key
 
     def __setitem__(self, key: Key, value: Value) -> None:
-        if not isinstance(key, Hashable):
+        if self.__unhashable(key):
             self.__setitem_unhashable(key, value)
             return
 
         self.from_collection[key] = value
 
     def __delitem__(self, key: Key) -> None:
-        if not isinstance(key, Hashable):
+        if self.__unhashable(key):
             self.__delitem_unhashable(key)
             return
 
@@ -130,3 +130,14 @@ class Map(MutableMapping[Key, Value]):
                 return self._unhashable_items.remove(item)
 
         raise KeyError(key)
+
+    @classmethod
+    def __unhashable(cls, value: Any) -> bool:
+        if not isinstance(value, Hashable):
+            return True
+
+        try:
+            hash(value)
+            return False
+        except TypeError:
+            return True
