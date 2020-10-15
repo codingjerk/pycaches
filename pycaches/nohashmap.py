@@ -1,7 +1,6 @@
 """
-Dict-like collection with no `Hashable` restriction on elements
+Dict-like collection with no `Hashable` restriction on elements.
 """
-
 
 from copy import deepcopy
 from dataclasses import dataclass
@@ -18,7 +17,7 @@ Value = TypeVar("Value")
 @dataclass
 class KeyValue(Generic[Key, Value]):
     """
-    Element of Map for unhashable keys
+    Element of Map for unhashable keys.
     """
 
     key: Key
@@ -27,7 +26,7 @@ class KeyValue(Generic[Key, Value]):
 
 class Map(MutableMapping[Key, Value]):
     """
-    Dict-like collection with no `Hashable` restriction on elements
+    Dict-like collection with no `Hashable` restriction on elements.
     """
 
     from_collection: Dict[Key, Value]
@@ -47,7 +46,7 @@ class Map(MutableMapping[Key, Value]):
 
     def copy(self) -> "Map[Key, Value]":
         """
-        Returns shallow copy of Map
+        Returns shallow copy of Map.
         """
 
         clone = Map(self.from_collection)

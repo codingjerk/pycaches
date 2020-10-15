@@ -1,7 +1,6 @@
 """
-Some useful caching decorators
+Some useful caching decorators.
 """
-
 
 from functools import wraps
 from typing import Any, Callable
@@ -15,7 +14,7 @@ Decorator = Callable[[Fany], Fany]
 
 def cache() -> Decorator:
     """
-    Make function results cachable between calls
+    Make function results cachable between calls.
     """
 
     def decorator(function: Fany) -> Fany:

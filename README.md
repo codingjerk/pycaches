@@ -7,7 +7,7 @@
 [![Chat on Gitter](https://img.shields.io/gitter/room/codingjerk/pycaches?style=flat-square)](https://gitter.im/codingjerk/pycaches)
 ![License](https://img.shields.io/pypi/l/pycaches?style=flat-square)
 
-A bunch of caches
+A bunch of caches.
 
 ## Installation
 
@@ -64,4 +64,4 @@ Do not forget to make sure code quality is high: run linters, typecheckers, chec
 1. `make quality`: `radon`
 1. `make build`: `setup.py`
 
-And just `make` or `make all` to run all these targets
+And just `make` or `make all` to run all these targets.

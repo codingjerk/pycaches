@@ -1,7 +1,7 @@
 """
 Dictionary-like collection
 with restrictions on total size and storage time
-and replacement of elements
+and replacement of elements.
 """
 
 
@@ -20,7 +20,7 @@ Value = TypeVar("Value")
 class CacheItem(Generic[Value]):
     """
     Cache item, containing value and metadata, such as:
-    cache hits, last access time, expiration time, etc
+    cache hits, last access time, expiration time, etc.
     """
 
     value: Value
@@ -28,7 +28,7 @@ class CacheItem(Generic[Value]):
 
     def expired(self) -> bool:
         """
-        Checks if item is expired
+        Checks if item is expired.
         """
 
         if self.expire_at is None:
@@ -54,7 +54,8 @@ class Cache(Generic[Key, Value]):
         expire_in: Optional[timedelta] = None,
     ) -> None:
         """
-        Adds item to cache
+        Adds item to cache.
+        Replaces item if cache size exceed `self._max_items`.
         """
 
         expire_at: Optional[datetime] = None

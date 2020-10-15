@@ -1,5 +1,5 @@
 """
-A bunch of caches
+A bunch of caches.
 """
 
 from pycaches.nohashmap import Map
