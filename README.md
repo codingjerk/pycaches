@@ -9,13 +9,29 @@
 
 A bunch of caches.
 
+## Features
+
+✓ Ease of use `cache` decorator
+
+✓ Support for non-`Hashable` keys (dictionaries, lists, sets)
+
+✓ Different cache replacement policies (random, LRU)
+
+✓ Time-based item expiration
+
+□ Cache hit/miss statistics
+
+□ Rich configuration, sane defaults
+
+□ Optional persistency
+
 ## Installation
 
 `$ pip install pycaches`
 
 ## Usage
 
-### Decorator
+### `cache` Decorator
 
 ```python
 from pycaches import cache
@@ -49,6 +65,53 @@ long_computation(5)  # Immediately returns 6
 long_computation(6)  # Sleeps for 1 second and returns 7
 long_computation(6)  # Immediately returns 7
 long_computation(6)  # And again
+```
+
+### `Cache` class
+
+```python
+import time
+from datetime import timedelta
+
+from pycaches import Cache
+
+
+cache = Cache()
+cache.save("a", 1)
+cache.save("b", 2)
+cache.save("c", 3, expire_in=timedelta(seconds=10))
+
+cache.has("c")  # returns True
+cache.get("a")  # returns 1
+
+time.sleep(10)
+cache.has("c")  # False
+cache.get("c")  # raises KeyError
+```
+
+### Different cache replacement policies
+
+```python
+from pycaches import Cache
+from pycaches.policies import LRU
+
+"""
+LRU stands for Least Recently Used.
+So LRU policy removes Least Recently Used item from cache
+if it's size exceed max_items.
+"""
+
+cache = Cache(max_items=2, replacement_policy=LRU())
+cache.save("a", 1)
+cache.save("b", 2)
+cache.save("c", 3)
+
+cache.has("a")  # returns False
+cache.has("b")  # returns True
+
+cache.save("d", 4)
+
+cache.has("b")  # returns False
 ```
 
 ## Contribution

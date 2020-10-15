@@ -14,9 +14,9 @@
 
 ## Docs
 
-□ Add features section to README
-
 □ Check English in docs and comments
+
+□ Create RTD documentation
 
 ## Refactoring
 
