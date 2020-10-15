@@ -5,7 +5,7 @@ from setuptools import find_packages, setup
 setup(
     name="pycaches",
     packages=find_packages(include="pycaches"),
-    version="0.0.3",
+    version="0.0.4",
     description="A bunch of caches",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
