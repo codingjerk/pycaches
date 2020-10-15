@@ -25,6 +25,7 @@ from pycaches import cache
 def example():
     print("Hi, I will be called once!")
 
+
 example()  # Prints "Hi, I will be called once!"
 example()  # Is not called
 ```
@@ -40,6 +41,7 @@ def long_computation(x):
     print("Performing long computation...")
     time.sleep(1)
     return x + 1
+
 
 long_computation(5)  # Sleeps for 1 second and returns 6
 long_computation(5)  # Immediately returns 6
