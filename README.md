@@ -17,7 +17,7 @@ A bunch of caches
 
 ### Decorator
 
-```
+```python
 from pycaches import cache
 
 
@@ -29,7 +29,7 @@ example()  # Prints "Hi, I will be called once!"
 example()  # Is not called
 ```
 
-```
+```python
 import time
 
 from pycaches import cache
