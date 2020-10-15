@@ -39,7 +39,10 @@ build:
 
 deploy:
   stage: deploy
-  script: make build deploy test_deploy
+  script:
+    - make deploy
+    - sleep 60  # sleep for a minute to make sure we can get build from PyPI
+    - make test_deploy
   only:
     refs:
       - master

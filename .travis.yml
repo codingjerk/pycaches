@@ -21,7 +21,10 @@ after_success:
 deploy:
   skip_cleanup: true
   provider: script
-  script: make deploy test_deploy
+  script:
+    - make deploy
+    - sleep 60  # sleep for a minute to make sure we can get build from PyPI
+    - make test_deploy
   on:
     python: "3.8"
     branch: master

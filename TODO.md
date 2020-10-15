@@ -22,6 +22,8 @@
 
 □ Rename Map.from_collection to Map._hashable_items
 
+□ Rename tests
+
 ## Performance
 
 □ Speedup `Map` with dictionary based on string representation
