@@ -5,6 +5,7 @@ from freezegun import freeze_time  # type: ignore
 import pytest
 
 from pycaches import Cache
+from pycaches.policies import LRU, Policy
 
 
 def test_cache_saves_items() -> None:
@@ -37,3 +38,44 @@ def test_cache_ignores_expired_items() -> None:
 
         with pytest.raises(KeyError):
             _ = cache.get(key)
+
+
+def test_cache_remove_item() -> None:
+    cache: Cache[Any, Any] = Cache()
+    key, value = {"key"}, "value"
+
+    cache.save(key, value)
+    assert cache.has(key)
+
+    cache.remove(key)
+    assert not cache.has(key)
+
+
+def test_cache_keeps_size_lesser_than_max_items() -> None:
+    cache: Cache[Any, Any] = Cache(max_items=3)
+
+    cache.save("1", 1)
+    cache.save("2", 2)
+    cache.save("3", 3)
+    assert cache.size() == 3
+
+    cache.save("4", 4)
+    assert cache.size() == 3
+
+
+def test_cache_removes_items_depending_on_replacement_policy() -> None:
+    lru: Policy[Any] = LRU()
+    cache: Cache[Any, Any] = Cache(max_items=4, replacement_policy=lru)
+
+    cache.save("1", 1)
+    cache.save("2", 2)
+    cache.save("3", 3)
+    cache.save("4", 4)
+
+    cache.save("5", 5)
+    assert not cache.has("1")
+
+    _ = cache.get("2")
+    cache.save("6", 6)
+    assert cache.has("2")
+    assert not cache.has("3")
