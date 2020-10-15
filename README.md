@@ -1,4 +1,4 @@
-# pycaches
+![Logo](https://raw.githubusercontent.com/codingjerk/pycaches/master/assets/social.png)
 
 [![PyPI](https://img.shields.io/pypi/v/pycaches?style=flat-square)](https://pypi.org/project/pycaches/)
 [![Travis build on master](https://img.shields.io/travis/codingjerk/pycaches/master?style=flat-square)](https://travis-ci.org/github/codingjerk/pycaches)
