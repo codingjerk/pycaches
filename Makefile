@@ -1,4 +1,4 @@
-all: lint typecheck test coverage quality build
+all: typecheck test coverage lint quality build
 
 .PHONY: test lint typecheck coverage quality benchmark build deploy test_deploy watch all
 
@@ -6,14 +6,14 @@ package = pycaches
 
 test:
 	@echo [ === TEST === ]
-	@python3 -m pytest --quiet --benchmark-disable
+	@python3 -m pytest --quiet --benchmark-disable --no-cov
 
 lint:
 	@echo [ === LINT === ]
 	@python3 -m pycodestyle $(package)
-	@python3 -m pylint --disable=W1116 $(package)
+	@python3 -m pylint --score=no --disable=W1116 $(package)
 	@python3 -m pycodestyle tests
-	@python3 -m pylint --disable=C0114,C0116,E0401,W0611,E1101 tests
+	@python3 -m pylint --score=no --disable=C0114,C0116,E0401,W0611,E1101 tests
 
 typecheck:
 	@echo [ === TYPECHECK === ]
@@ -22,7 +22,7 @@ typecheck:
 
 coverage:
 	@echo [ === COVERAGE === ]
-	@PYTHONPATH=. python3 -m pytest --cov=$(package) --cov-fail-under=100 --cov-report=term-missing:skip-covered --benchmark-disable --quiet
+	@PYTHONPATH=. python3 -m pytest --cov=$(package) --cov-branch --cov-fail-under=100 --cov-report=term-missing:skip-covered --benchmark-disable --quiet
 
 quality:
 	@echo [ === QUALITY === ]
@@ -31,11 +31,11 @@ quality:
 
 benchmark:
 	@echo [ === BENCHMARK === ]
-	@python3 -m pytest --quiet --benchmark-only --benchmark-save=benchmark
+	@python3 -m pytest --quiet --benchmark-only --benchmark-save=benchmark --no-cov
 
 benchmark_compare:
 	@echo [ === BENCHMARK === ]
-	@python3 -m pytest --quiet --benchmark-only --benchmark-compare
+	@python3 -m pytest --quiet --benchmark-only --benchmark-compare --no-cov
 
 build:
 	@echo [ === BUILD === ]

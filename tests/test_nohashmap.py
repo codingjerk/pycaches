@@ -106,6 +106,8 @@ def test_unhashable_items_deletion() -> None:
 
 def test_unhashable_items_raises_errors() -> None:
     pycaches_map: Map[Any, str] = Map()
+    pycaches_map[1] = "1"
+    pycaches_map[[2]] = "2"
 
     with pytest.raises(KeyError):
         _ = pycaches_map[["not existed value"]]
