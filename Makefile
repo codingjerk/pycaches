@@ -1,6 +1,6 @@
 all: lint typecheck test coverage quality build
 
-.PHONY: test lint typecheck coverage quality benchmark build deploy watch all
+.PHONY: test lint typecheck coverage quality benchmark build deploy test_deploy watch all
 
 package = pycaches
 
@@ -45,6 +45,10 @@ deploy:
 	@echo [ === DEPLOY === ]
 	@rm -rf dist/$(package)-*.linux-x86_64.tar.gz
 	@python3 -m twine upload dist/$(package)-*.tar.gz
+
+test_deploy:
+	@echo [ === TEST DEPLOY === ]
+	@sh tests/functional/test_deploy.sh
 
 watch:
 	@echo [ === WATCH === ]

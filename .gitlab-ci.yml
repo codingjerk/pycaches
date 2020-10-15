@@ -39,7 +39,7 @@ build:
 
 deploy:
   stage: deploy
-  script: make build deploy
+  script: make build deploy test_deploy
   only:
     refs:
       - master

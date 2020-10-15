@@ -21,7 +21,7 @@ after_success:
 deploy:
   skip_cleanup: true
   provider: script
-  script: make deploy
+  script: make deploy test_deploy
   on:
     python: "3.8"
     branch: master
