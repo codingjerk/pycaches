@@ -3,7 +3,7 @@
 # === Setup ===
 version=$(grep -oP 'version="\K[^"]+' setup.py)
 python3 -m venv .venv_test_deploy
-source .venv_test_deploy/bin/activate
+. .venv_test_deploy/bin/activate
 
 clean_exit() {
   rm -rf .venv_test_deploy
