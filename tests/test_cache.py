@@ -102,3 +102,22 @@ def test_lru_policy() -> None:
     cache.save("6", 6)
     assert cache.has("2")
     assert not cache.has("3")
+
+
+def test_disable_copy_keys_can_cause_bugs() -> None:
+    copy_cache: Cache[Any, Any] = Cache()
+    bugged_cache: Cache[Any, Any] = Cache(copy_keys=False)
+    key = [1]
+    value = "value"
+
+    copy_cache.save(key, value)
+    bugged_cache.save(key, value)
+    key[0] = 2  # mutating the key
+
+    assert bugged_cache.has(key)
+    assert bugged_cache.has([2])
+    assert not bugged_cache.has([1])
+
+    assert not copy_cache.has(key)
+    assert not copy_cache.has([2])
+    assert copy_cache.has([1])

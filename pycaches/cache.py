@@ -45,9 +45,13 @@ class Cache(Generic[Key, Value]):
     and replacement of elements.
     """
 
+    copy_keys: bool = True
     max_items: Optional[int] = None
     replacement_policy: Policy[Key] = field(default_factory=RandomPolicy)
-    _map: Map[Key, CacheItem[Value]] = field(default_factory=Map)
+    _map: Map[Key, CacheItem[Value]] = field(init=False)
+
+    def __post_init__(self) -> None:
+        self._map = Map(copy_keys=self.copy_keys)
 
     def has(self, key: Key) -> bool:
         """

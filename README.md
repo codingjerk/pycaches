@@ -117,6 +117,26 @@ cache.save("d", 4)
 cache.has("b")  # returns False
 ```
 
+### Disable `deepcopy` for keys
+
+```python
+from pycaches import cache
+
+"""
+Cache class and cache decorator accepts `copy_keys` argument.
+If you can garantee that keys will not change even if they are mutable,
+you may set it to `True` to speed things up.
+"""
+
+
+@cache(copy_keys=False)
+def faster_caching(x):
+    return x
+
+
+faster_caching({1, 2, 3})  # returns {1, 2, 3}
+```
+
 ## Contribution
 
 Just clone repository, make your changes and create a pull request.

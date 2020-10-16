@@ -4,11 +4,7 @@
 
 □ Other cache policies (LFU, ARC, etc.)
 
-□ Remove expired items from cache before running cache replacement policy
-
 □ (?) Count only not-expired items in `size` method
-
-□ `cache` decorator options (expiration_timedelta, policy, copy_keys)
 
 □ Cache hit/miss/size statistics
 
