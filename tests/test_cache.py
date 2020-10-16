@@ -63,7 +63,30 @@ def test_cache_keeps_size_lesser_than_max_items() -> None:
     assert cache.size() == 3
 
 
-def test_cache_removes_items_depending_on_replacement_policy() -> None:
+def test_cache_clears_expired_items_before_replacement() -> None:
+    lru: Policy[Any] = LRU()
+    cache: Cache[Any, Any] = Cache(max_items=4, replacement_policy=lru)
+
+    with freeze_time("2020-10-01 12:00:00"):
+        cache.save("1", 1)
+        cache.save("2", 2, expire_in=timedelta(seconds=20))
+        cache.save("3", 3, expire_in=timedelta(seconds=10))
+        cache.save("4", 4, expire_in=timedelta(seconds=10))
+
+    with freeze_time("2020-10-01 12:00:10"):
+        cache.save("5", 5)
+        cache.save("6", 6)
+
+        assert cache.has("1")
+        assert cache.has("2")
+        assert cache.has("5")
+        assert cache.has("6")
+
+        assert not cache.has("3")
+        assert not cache.has("4")
+
+
+def test_lru_policy() -> None:
     lru: Policy[Any] = LRU()
     cache: Cache[Any, Any] = Cache(max_items=4, replacement_policy=lru)
 

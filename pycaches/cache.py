@@ -100,6 +100,9 @@ class Cache(Generic[Key, Value]):
         """
 
         if self.full():
+            self.__remove_expired_items()
+
+        if self.full():
             key_to_remove = self.replacement_policy.next_to_replace()
             self.remove(key_to_remove)
 
@@ -118,3 +121,13 @@ class Cache(Generic[Key, Value]):
 
         self.replacement_policy.remove(key)
         del self._map[key]
+
+    def __remove_expired_items(self) -> None:
+        keys_to_remove = []
+
+        for key, item in self._map.items():
+            if item.expired():
+                keys_to_remove.append(key)
+
+        for key in keys_to_remove:
+            self.remove(key)
