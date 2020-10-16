@@ -6,6 +6,8 @@
 
 □ Remove expired items from cache before running cache replacement policy
 
+□ (?) Count only not-expired items in `size` method
+
 □ `cache` decorator options (expiration_timedelta, policy, copy_keys)
 
 □ Cache hit/miss/size statistics
@@ -29,6 +31,8 @@
 □ Speedup `Map` with dictionary based on string representation
 
 □ Write more benchmarks for typical usage as a cache
+
+□ Store items with expiration separately to speed up cleanup
 
 ## Testing
 

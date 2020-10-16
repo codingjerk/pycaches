@@ -27,11 +27,13 @@ A bunch of caches.
 
 ## Installation
 
-`$ pip install pycaches`
+```shell
+pip install pycaches
+```
 
 ## Usage
 
-### `cache` Decorator
+### `cache` decorator
 
 ```python
 from pycaches import cache
@@ -100,6 +102,7 @@ LRU stands for Least Recently Used.
 So LRU policy removes Least Recently Used item from cache
 if it's size exceed max_items.
 """
+
 
 cache = Cache(max_items=2, replacement_policy=LRU())
 cache.save("a", 1)
