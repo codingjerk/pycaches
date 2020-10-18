@@ -27,6 +27,14 @@ A bunch of caches.
 
 ## Installation
 
+Recommended way is to use [poetry](https://python-poetry.org/):
+
+```shell
+poetry install pycaches
+```
+
+But you also can install library with pip:
+
 ```shell
 pip install pycaches
 ```

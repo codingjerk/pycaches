@@ -10,7 +10,8 @@ branches:
   - develop
 
 install:
-  - pip install -r requirements.txt
+  - pip install poetry
+  - poetry install
 
 script:
   - make test lint typecheck coverage quality benchmark build

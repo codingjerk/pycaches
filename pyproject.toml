@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "pycaches"
+version = "0.0.6"
+description = "Python caching made easy"
+authors = ["Denis Gruzdev <codingjerk@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/codingjerk/pycaches"
+repository = "https://github.com/codingjerk/pycaches"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+freezegun = "^1.0.0"
+mypy = "0.782"
+pycodestyle = "^2.6.0"
+pylint = "^2.6.0"
+pytest-benchmark = "^3.2.3"
+pytest-cov = "^2.10.1"
+pytest-runner = "^5.2"
+pytest = "^6.0.1"
+radon = "^4.3.2"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
