@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pycaches"
-version = "0.0.6"
+version = "0.0.7"
 description = "Python caching made easy"
 authors = ["Denis Gruzdev <codingjerk@gmail.com>"]
 license = "MIT"
