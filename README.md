@@ -7,7 +7,7 @@
 [![Chat on Gitter](https://img.shields.io/gitter/room/codingjerk/pycaches?style=flat-square)](https://gitter.im/codingjerk/pycaches)
 ![License](https://img.shields.io/pypi/l/pycaches?style=flat-square)
 
-A bunch of caches.
+Python caching made easy.
 
 ## Features
 
