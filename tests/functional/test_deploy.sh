@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # === Setup ===
-version=$(grep -oP 'version="\K[^"]+' setup.py)
+version=$(grep -oP 'version = "\K[^"]+' pyproject.toml)
 python3 -m venv .venv_test_deploy
 . .venv_test_deploy/bin/activate
 
